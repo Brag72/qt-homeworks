@@ -1,27 +1,33 @@
 #include "stopwatchclass.h"
 
 Stopwatch::Stopwatch(QObject *parent)
-    : QObject(parent), timeElapsed(0) {
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, [this]() {
-        timeElapsed += 0.1;
-        emit timeUpdated(timeElapsed);
-    });
+    : QObject(parent), m_timer(new QTimer(this)) {
+    connect(m_timer, &QTimer::timeout, this, &Stopwatch::updateTime);
 }
 
 void Stopwatch::start() {
-    timer->start(100);
+    if (!m_timer->isActive()) {
+        m_timer->start(100); // Обновляем каждую 0.1 секунды
+    }
 }
 
 void Stopwatch::stop() {
-    timer->stop();
+    if (m_timer->isActive()) {
+        m_timer->stop();
+    }
 }
 
 void Stopwatch::reset() {
-    stop();
-    timeElapsed = 0;
+    m_seconds = 0;
+    emit timeChanged(m_seconds);
 }
 
-qreal Stopwatch::elapsedTime() const {
-    return timeElapsed;
+void Stopwatch::updateTime() {
+    ++m_seconds;
+    emit timeChanged(m_seconds);
+}
+
+// Новая реализация метода
+int Stopwatch::getSeconds() const {
+    return m_seconds;
 }

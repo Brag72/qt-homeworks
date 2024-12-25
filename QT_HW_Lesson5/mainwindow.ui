@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>317</width>
-    <height>107</height>
+    <height>162</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
      </widget>
     </item>
     <item row="0" column="1" colspan="2">
-     <widget class="QTextBrowser" name="CircleCount"/>
+     <widget class="QTextBrowser" name="Circle_Count"/>
     </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="Start_stop">

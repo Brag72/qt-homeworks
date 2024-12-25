@@ -16,16 +16,16 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_Start_stop_clicked();
-    void on_Clear_button_clicked();
-    void on_Circle_button_clicked();
-    void updateTimerDisplay(qreal seconds);
+    void on_start_stop_button_clicked();
+    void on_clear_button_clicked();
+    void on_lap_button_clicked();
+    void updateTimeLabel(int seconds);
 
 private:
     Ui::MainWindow *ui;
-    Stopwatch *stopwatch;
-    int lapCount;
-    bool running;
+    Stopwatch *m_stopwatch;
+    int m_lapNumber = 0;
+    int m_lastLapStartTime = 0; // Время старта последнего круга
 };
 
 #endif // MAINWINDOW_H

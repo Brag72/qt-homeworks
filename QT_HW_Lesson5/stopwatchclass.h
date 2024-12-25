@@ -6,20 +6,24 @@
 
 class Stopwatch : public QObject {
     Q_OBJECT
-
 public:
-    Stopwatch(QObject *parent = nullptr);
+    explicit Stopwatch(QObject *parent = nullptr);
+
     void start();
     void stop();
     void reset();
-    qreal elapsedTime() const;
+
+    int getSeconds() const; // Новый метод для доступа к текущему времени
 
 signals:
-    void timeUpdated(qreal seconds);
+    void timeChanged(int seconds);
+
+private slots:
+    void updateTime();
 
 private:
-    QTimer *timer;
-    qreal timeElapsed;
+    int m_seconds = 0;
+    QTimer* m_timer;
 };
 
 #endif // STOPWATCH_H
