@@ -5,9 +5,15 @@ Stopwatch::Stopwatch(QObject *parent)
     connect(m_timer, &QTimer::timeout, this, &Stopwatch::updateTime);
 }
 
+//void Stopwatch::start() {
+//    if (!m_timer->isActive()) {
+//        m_timer->start(1000);
+//    }
+//}
+
 void Stopwatch::start() {
     if (!m_timer->isActive()) {
-        m_timer->start(100); // Обновляем каждую 0.1 секунды
+        m_timer->start(100);
     }
 }
 
@@ -22,11 +28,14 @@ void Stopwatch::reset() {
     emit timeChanged(m_seconds);
 }
 
+//void Stopwatch::updateTime() {
+//    ++m_seconds;
+//    emit timeChanged(m_seconds);
+//}
 void Stopwatch::updateTime() {
-    ++m_seconds;
+    m_seconds += 100; // Увеличиваем на 100 миллисекунд
     emit timeChanged(m_seconds);
 }
-
 // Новая реализация метода
 int Stopwatch::getSeconds() const {
     return m_seconds;

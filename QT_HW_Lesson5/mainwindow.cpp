@@ -45,9 +45,22 @@ void MainWindow::on_lap_button_clicked() {
     m_lastLapStartTime = currentTime; // Обновляем время старта следующего круга
 }
 
-void MainWindow::updateTimeLabel(int seconds) {
-    int minutes = seconds / 60;
-    int secs = seconds % 60;
-    QString timeString = QString("%1:%2").arg(minutes, 2, 10, QChar('0')).arg(secs, 2, 10, QChar('0'));
+//void MainWindow::updateTimeLabel(int seconds) {
+//    int minutes = seconds / 60;
+//    int secs = seconds % 60;
+//    QString timeString = QString("%1:%2").arg(minutes, 2, 10, QChar('0')).arg(secs, 2, 10, QChar('0'));
+//    ui->Timer->setText(timeString);
+//}
+
+void MainWindow::updateTimeLabel(int milliseconds) {
+    int totalSeconds = milliseconds / 1000;
+    int secs = totalSeconds % 60;
+    int mins = totalSeconds / 60;
+    int tenths = (milliseconds % 1000) / 100; // Получаем десятые доли секунды
+
+    QString timeString = QString("%1:%2.%3")
+        .arg(mins, 2, 10, QChar('0'))
+        .arg(secs, 2, 10, QChar('0'))
+        .arg(tenths, 1, 10, QChar('0')); // Отображаем только одну цифру для десятых долей
     ui->Timer->setText(timeString);
 }
